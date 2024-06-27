@@ -1,1 +1,36 @@
-Word Guesser
+import random
+
+
+def play(word):
+    tries = 6
+    hidden = []
+    hidden.extend(word)
+    show = len(word) * "_"
+    print(show)
+    print("You have {} tries left".format(tries))
+    while show != word:
+        if tries == 0:
+            print("You have no attempts left(")
+            print("You lost it")
+        s = input()
+        if s in hidden:
+            while s in hidden:
+                a = hidden.index(s)
+                show = show[:a] + s + show[a + 1:]
+                del hidden[a]
+                hidden.insert(a, " ")
+            print(show)
+        else:
+            tries -= 1
+            print(show)
+            print("You have {} tries left".format(tries))
+    else:
+        print("You won! Thank you for playing'")
+
+
+
+variants = ["adventure", "bliss", "childhood", "daydream", "extraordinary", "fireflies", "grief", "happiness", "joy",
+            "lazy", "misfortune", "nature", "ocean", "passion", "rainbow", "sparkle", "treasure", "unrequited",
+            "vacation", "wonderful"]
+word = random.choice(variants)
+play(word)
